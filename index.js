@@ -14,6 +14,10 @@ module.exports = class WordFilter extends Plugin {
 
     const Message = await getModule(m => m.default && m.default.displayName === 'Message');
     inject('word-filter', Message, 'default', (args, res) => {
+      const currentUser = getModule(['getCurrentUser'], false).getCurrentUser()
+      if (args[0]['childrenAccessories']['props']['message']["author"]["id"] == currentUser["id"]) {
+        return res;
+      };
       const filters = this.settings.get('filteredWords');
       filters.forEach(word => {
         word = word.value
