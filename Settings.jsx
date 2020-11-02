@@ -27,6 +27,7 @@ module.exports = class Settings extends React.Component {
                     Save
                 </Button>
                 <SwitchItem
+                    style={{ paddingTop: 10 }}
                     value={this.props.getSetting('blur', false)}
                     onChange={() => {
                         this.props.toggleSetting('blur')
