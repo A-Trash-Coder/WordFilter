@@ -14,6 +14,7 @@ module.exports = class WordFilter extends Plugin {
     });
 
     const Message = await getModule(m => m.default && m.default.displayName === 'Message');
+    const oldDefault = Message.default;
     inject('word-filter', Message, 'default', (args, res) => {
       const currentUser = getModule(['getCurrentUser'], false).getCurrentUser();
       const authorId = args[0]['childrenAccessories']['props']['message']["author"]["id"];
@@ -41,6 +42,7 @@ module.exports = class WordFilter extends Plugin {
       });
       return res
     });
+    Object.assign(Message.default, oldDefault);
 
   }
 
