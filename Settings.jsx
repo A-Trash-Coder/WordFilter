@@ -1,6 +1,7 @@
 const { getModuleByDisplayName, React } = require('powercord/webpack');
 const { Button, AsyncComponent } = require('powercord/components');
 const Input = AsyncComponent.from(getModuleByDisplayName('TextInput'));
+const { SwitchItem } = require('powercord/components/settings')
 
 module.exports = class Settings extends React.Component {
     constructor(props) {
@@ -13,7 +14,7 @@ module.exports = class Settings extends React.Component {
     render() {
         return (
             <div>
-                <div style={{paddingBottom: 10}} id='filtered-words'>
+                <div style={{ paddingBottom: 10 }} id='filtered-words'>
                     {this.generateInputs()}
                 </div>
                 <Button
@@ -25,6 +26,15 @@ module.exports = class Settings extends React.Component {
                 >
                     Save
                 </Button>
+                <SwitchItem
+                    value={this.props.getSetting('blur', false)}
+                    onChange={() => {
+                        this.props.toggleSetting('blur')
+                    }}
+                    note='Whether to blur a message that contians a filtered word rather than deleting it.'
+                >
+                    Blur Filtered Message
+                </SwitchItem>
             </div>
         );
     }

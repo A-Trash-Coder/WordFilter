@@ -1,0 +1,9 @@
+.filterWord {
+    transition: .3s linear !important;
+    filter: blur(10px) !important;
+}
+
+.filterWord:hover {
+    transition: .3s linear !important;
+    filter: none !important;
+}
